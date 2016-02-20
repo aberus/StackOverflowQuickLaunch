@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Microsoft.Internal.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio;
@@ -27,6 +28,10 @@ namespace Aberus.StackOverflowQuickLaunch
         /// </summary>
         protected async override void OnStartSearch()
         {
+            var sortQuery = "relevance";
+            var sort = StackOverflowQuickLaunchPackage.Instance.Sort;
+            if (sort != null && sort.HasValue)
+                sortQuery = sort.Value.ToString().ToLowerInvariant();
             //// Get the tokens count in the query
             //uint tokenCount = this.SearchQuery.GetTokens(0, null);
             //// Get the tokens
@@ -40,8 +45,8 @@ namespace Aberus.StackOverflowQuickLaunch
                 {
                     AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
                 });
-            //2.2/search/excerpts?order=desc&sort=relevance&site=stackoverflow&q=
-            using (var response = await client.GetAsync("http://api.stackexchange.com/2.2/search?site=stackoverflow&intitle=" + WebUtility.UrlEncode(SearchQuery.SearchString.Trim()), cancellationSource.Token))
+            
+            using (var response = await client.GetAsync("http://api.stackexchange.com/2.2/search/excerpts?order=desc&sort=" + sortQuery + "&site=stackoverflow&q=" + WebUtility.UrlEncode(SearchQuery.SearchString.Trim()), cancellationSource.Token))
             using (var receiveStream = await response.Content.ReadAsStreamAsync())
             {
                 DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(StackOverflowSearchResult));
@@ -69,8 +74,9 @@ namespace Aberus.StackOverflowQuickLaunch
                 for (int itemIndex = 0; itemIndex < results.Length; itemIndex++)
                 {
                     var itemResult = new StackOverflowSearchItemResult(
-                        WebUtility.HtmlDecode(results[itemIndex].Title),
-                        results[itemIndex].Link,
+                        (results[itemIndex].ItemType == ItemType.Question ? "Q: " : "A: ") + WebUtility.HtmlDecode(results[itemIndex].Title),
+                        FormatExcerpt(WebUtility.HtmlDecode(results[itemIndex].Excerpt)).Trim(),
+                        "http://stackoverflow.com/questions/" + results[itemIndex].QuestionId,
                         new WinFormsIconUIObject(Resources.StackOverflow),
                         searchProvider);
 
@@ -88,7 +94,7 @@ namespace Aberus.StackOverflowQuickLaunch
             {
                 // Create and report new result
                 SearchCallback.ReportResult(this, 
-                    new StackOverflowSearchItemResult("Search Stack Overflow for '" + SearchQuery.SearchString + "'",
+                    new StackOverflowSearchItemResult("Search Stack Overflow for '" + SearchQuery.SearchString + "'", null,
                         "http://stackoverflow.com/search?q=" + WebUtility.UrlEncode(SearchQuery.SearchString.Trim()),
                         null,
                         searchProvider));
@@ -99,6 +105,14 @@ namespace Aberus.StackOverflowQuickLaunch
 
             // Now call the base class - it will set the task status to complete and will callback to report search complete
             base.OnStartSearch();
+        }
+
+        private string FormatExcerpt(string excerpt)
+        {
+            var removedNewLines = Regex.Replace(excerpt, @"(\t|\n|\r|\s){1,}", " ");
+            string pattern = "<span class=\"highlight\">|</span>";
+            var regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            return regex.Replace(removedNewLines, String.Empty);
         }
 
         protected new IVsSearchProviderCallback SearchCallback

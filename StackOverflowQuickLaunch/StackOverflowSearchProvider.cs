@@ -65,7 +65,7 @@ namespace Aberus.StackOverflowQuickLaunch
              string url = data[1];
              string description = data[2];
 
-             return new StackOverflowSearchItemResult(name, url, description, new WinFormsIconUIObject(Resources.StackOverflow), this);
+             return new StackOverflowSearchItemResult(name, description, url, new WinFormsIconUIObject(Resources.StackOverflow), this);
         }
 
         public IVsSearchTask CreateSearch(uint dwCookie, IVsSearchQuery pSearchQuery, IVsSearchProviderCallback pSearchCallback)

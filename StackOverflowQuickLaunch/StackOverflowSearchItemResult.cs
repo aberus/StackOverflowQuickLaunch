@@ -11,9 +11,9 @@ namespace Aberus.StackOverflowQuickLaunch
         {
             DisplayText = name;
             Url = url;
-            Icon = icon;
-            PersistenceData = name + "|" + Url;
             Description = description;
+            Icon = icon;
+            PersistenceData = name + "|" + url + "|" + description;
             SearchProvider = provider;
         }
 

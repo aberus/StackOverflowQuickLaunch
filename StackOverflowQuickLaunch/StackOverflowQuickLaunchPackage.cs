@@ -29,6 +29,7 @@ namespace Aberus.StackOverflowQuickLaunch
     [ProvideSearchProvider(typeof(StackOverflowSearchProvider), "Stack Overflow Search Provider")]
     // Derive the package class from ExtensionPointPackage instead of Package
     // This will add support for automatic creation of the search provider as an extensibility point
+    [ProvideOptionPage(typeof(StackOverflowSearchOptionPage), "StackOverflowSearchProvider", "SearchSettings", 101, 102, true, new[] { "Stack Overflow", "StackOverflow", "Search" })]
     public sealed class StackOverflowQuickLaunchPackage : ExtensionPointPackage
     {
         /// <summary>
@@ -57,6 +58,24 @@ namespace Aberus.StackOverflowQuickLaunch
         {
             Trace.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
             base.Initialize();
+
+            Instance = this;
+        }
+
+        public static StackOverflowQuickLaunchPackage Instance { get; private set; }
+
+        public Sort? Sort
+        {
+            get
+            {
+                var optionsPage = GetDialogPage(typeof(StackOverflowSearchOptionPage)) as StackOverflowSearchOptionPage;
+                if (optionsPage != null)
+                {
+                    return optionsPage.Sort;
+                }
+                return null;
+
+            }
         }
         #endregion
     }
