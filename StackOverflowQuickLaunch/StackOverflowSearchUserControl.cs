@@ -26,6 +26,10 @@ namespace Aberus.StackOverflowQuickLaunch
             this.comboBox1.DisplayMember = "Value";
             this.comboBox1.ValueMember = "Key";
             this.comboBox1.SelectedItem = OptionsPage.Sort;
+
+            this.numericUpDown1.Value = OptionsPage.ShowResults;
+
+            this.checkBox1.Checked = OptionsPage.AlwayShowLink;
         }
 
         public StackOverflowSearchOptionPage OptionsPage { get; set; }
@@ -36,6 +40,16 @@ namespace Aberus.StackOverflowQuickLaunch
             Enum.TryParse<Sort>(comboBox1.SelectedValue.ToString(), out sort);
 
             OptionsPage.Sort = sort;
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            OptionsPage.ShowResults = (int)numericUpDown1.Value;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            OptionsPage.AlwayShowLink = checkBox1.Checked;
         }
     }
 

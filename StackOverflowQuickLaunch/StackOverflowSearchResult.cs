@@ -8,7 +8,28 @@ namespace Aberus.StackOverflowQuickLaunch
     public class StackOverflowSearchResult
     {
         [DataMember(Name = "items")]
-        public List<Item> Items { get; set; }
+        public Item[] Items { get; set; }
+
+        [DataMember(Name = "has_more")]
+        public bool HasMore { get; set; }
+
+        [DataMember(Name = "quota_max")]
+        public int QuotaMax { get; set; }
+
+        [DataMember(Name = "quota_remaining")]
+        public int QuotaRemaining { get; set; }
+
+        [DataMember(Name = "backoff")]
+        public int? Backoff { get; set; }
+        
+        [DataMember(Name = "error_id")] //throttle_violation – 502 
+        public int? ErrorId { get; set; }
+
+        [DataMember(Name = "error_message")]
+        public string ErrorMessage { get; set; }
+
+        [DataMember(Name = "error_name")]
+        public string ErrorName { get; set; }
     }
 
     [DataContract]

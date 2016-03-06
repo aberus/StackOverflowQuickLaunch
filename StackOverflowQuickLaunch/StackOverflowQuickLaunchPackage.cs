@@ -20,7 +20,7 @@ namespace Aberus.StackOverflowQuickLaunch
     [PackageRegistration(UseManagedResourcesOnly = true)]
     // This attribute is used to register the information needed to show this package
     // in the Help/About dialog of Visual Studio.
-    [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
+    [InstalledProductRegistration("#110", "#112", "0.3", IconResourceID = 400)]
     // Declare the package guid
     [Guid(GuidList.guidStackOverflowQuickLaunchQuickLaunchPkgString)]
     // Declare a global search provider supported by this package
@@ -41,7 +41,7 @@ namespace Aberus.StackOverflowQuickLaunch
         /// </summary>
         public StackOverflowQuickLaunchPackage()
         {
-            Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", this.ToString()));
+            Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", this.ToString()));
         }
 
 
@@ -56,7 +56,7 @@ namespace Aberus.StackOverflowQuickLaunch
         /// </summary>
         protected override void Initialize()
         {
-            Trace.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
+            Debug.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
             base.Initialize();
 
             Instance = this;
@@ -64,19 +64,43 @@ namespace Aberus.StackOverflowQuickLaunch
 
         public static StackOverflowQuickLaunchPackage Instance { get; private set; }
 
-        public Sort? Sort
+        //public Sort? Sort
+        //{
+        //    get
+        //    {
+        //        var optionsPage = GetDialogPage(typeof(StackOverflowSearchOptionPage)) as StackOverflowSearchOptionPage;
+        //        if (optionsPage != null)
+        //        {
+        //            return optionsPage.Sort;
+        //        }
+        //        return null;
+
+        //    }
+        //}
+
+        //public bool? AlwayShowLink
+        //{
+        //    get
+        //    {
+        //        var optionsPage = GetDialogPage(typeof(StackOverflowSearchOptionPage)) as StackOverflowSearchOptionPage;
+        //        if (optionsPage != null)
+        //        {
+        //            return optionsPage.AlwayShowLink;
+        //        }
+        //        return null;
+
+        //    }
+        //}
+
+        public StackOverflowSearchOptionPage OptionPage
         {
             get
             {
-                var optionsPage = GetDialogPage(typeof(StackOverflowSearchOptionPage)) as StackOverflowSearchOptionPage;
-                if (optionsPage != null)
-                {
-                    return optionsPage.Sort;
-                }
-                return null;
-
+                var optionsPage = (StackOverflowSearchOptionPage)GetDialogPage(typeof(StackOverflowSearchOptionPage));
+                return optionsPage;
             }
         }
+
         #endregion
     }
 }

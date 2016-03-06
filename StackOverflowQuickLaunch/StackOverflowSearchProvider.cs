@@ -20,17 +20,26 @@ namespace Aberus.StackOverflowQuickLaunch
     {
         public Guid Category
         {
-            get { return new Guid(GuidList.guidStackOverflowSearchProviderString); }
+            get 
+            { 
+                return new Guid(GuidList.guidStackOverflowSearchProviderString); 
+            }
         }
 
         public string Description
         {
-            get { return Resources.SearchProviderDescription; }
+            get 
+            { 
+                return Resources.SearchProviderDescription; 
+            }
         }
 
         public string DisplayText
         {
-            get { return Resources.SearchProviderDisplayText; }
+            get 
+            { 
+                return Resources.SearchProviderDisplayText; 
+            }
         }
 
         public void ProvideSearchSettings(IVsUIDataSource pSearchOptions)
@@ -50,22 +59,33 @@ namespace Aberus.StackOverflowQuickLaunch
 
         public string Shortcut
         {
-            get { return "stack"; }
+            get 
+            { 
+                return "stack"; 
+            }
         }
 
         public string Tooltip
         {
-            get { return null; }
+            get 
+            { 
+                return null; 
+            }
         }
 
         public IVsSearchItemResult CreateItemResult(string lpszPersistenceData)
         {
-             string[] data = lpszPersistenceData.Split('|'); 
-             string name = data[0]; 
-             string url = data[1];
-             string description = data[2];
+            string[] data = lpszPersistenceData.Split('|');
+            if (data.Length != 3)
+                return null;
 
-             return new StackOverflowSearchItemResult(name, description, url, new WinFormsIconUIObject(Resources.StackOverflow), this);
+            string name = data[0];
+            string url = data[1];
+            string description = data[2];
+            if (string.IsNullOrWhiteSpace(url))
+                return null;
+
+            return new StackOverflowSearchItemResult(name, description, url, new WinFormsIconUIObject(Resources.StackOverflow), this);
         }
 
         public IVsSearchTask CreateSearch(uint dwCookie, IVsSearchQuery pSearchQuery, IVsSearchProviderCallback pSearchCallback)

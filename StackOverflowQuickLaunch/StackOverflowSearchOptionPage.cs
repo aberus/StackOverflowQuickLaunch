@@ -14,9 +14,6 @@ namespace Aberus.StackOverflowQuickLaunch
     {
         private Sort sort = Sort.Relevance;
 
-        [Category("My Category")]
-        [DisplayName("My Integer Option")]
-        [Description("My integer option")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Sort Sort
         {
@@ -31,17 +28,42 @@ namespace Aberus.StackOverflowQuickLaunch
             }
         }
 
-        private int myVar;
 
-        [Category("My Category")]
-        [DisplayName("My Integer Option1")]
-        [Description("My integer option1")]
-        public int MyProperty
+        bool alwayShowLink = false;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool AlwayShowLink
         {
-            get { return myVar; }
-            set { myVar = value; }
+            get
+            {
+                return alwayShowLink;
+            }
+            set
+            {
+                if (value != alwayShowLink)
+                    alwayShowLink = value;
+            }
         }
 
+
+        int showResults = 40;
+
+        //[Category("My Category")]
+        //[DisplayName("My Integer Option")]
+        //[Description("My integer option")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public int ShowResults
+        {
+            get
+            {
+                return showResults;
+            }
+            set
+            {
+                if (value != showResults)
+                    showResults = value;
+            }
+        }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -54,15 +76,17 @@ namespace Aberus.StackOverflowQuickLaunch
                 page.Initialize();
                 return page;
             }
-        }        
+        }
     }
 
     public enum Sort { 
-        [Description("(none)")]
-        None = 0,
-        Activity, 
-        Votes, 
-        Creation, 
-        Relevance 
+        //[Description("(default)")]
+        //None = 0,
+        [Description("Active")]
+        Activity = 4, 
+        Votes = 3,
+        [Description("Newest")]
+        Creation = 2, 
+        Relevance = 1,
     }; 
 }
