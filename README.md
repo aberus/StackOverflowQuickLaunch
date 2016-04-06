@@ -21,25 +21,25 @@ on the official Visual Studio extension gallery.
 
 ## 0.3     
 
-Added new options in options panel (Tools -> Options... -> Stack Overflow Quick Launch Provider)
+- Added new options in options panel (Tools -> Options... -> Stack Overflow Quick Launch Provider)
 
-Bug fixes
+- Bug fixes
 
-Updated error handing
+- Updated error handing
 
 ## 0.2
 
-Search now shows same results as stackoverflow.com with answers and questions.
+- Search now shows same results as stackoverflow.com with answers and questions.
 
-Under the hood improvements.
+- Under the hood improvements.
 
 ## 0.1.2
 
-Visual Studio Community support
+- Visual Studio Community support
 
 ## 0.1.1
 
-Visual Studio 2015 support & License added
+- Visual Studio 2015 support & License added
 
 ## 0.1
 
