@@ -1,48 +1,51 @@
 # StackOverflowQuickLaunch
 
-<!-- Replace this badge with your own-->
-[![Build status](https://ci.appveyor.com/api/projects/status/hv6uyc059rqbc6fj?svg=true)](https://ci.appveyor.com/project/madskristensen/extensibilitytools)
+Stack Overflow Quick Launch Provider allows you to search Stack Overflow within Visual Studio.
+ 
+Just press Ctrl + Q or click inside Quick Launch search box and start typing your question.
+When you click on a selected search result you will be redirected to the Stack Overflow's site.
+ 
+This extension works with Visual Studio 2012, 2013 and 2015.
 
-<!-- Update the VS Gallery link after you upload the VSIX-->
-Download this extension from the [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/[GuidFromGallery])
-or get the [CI build](http://vsixgallery.com/extension/ToDoGlyphFactorySample/).
+Download this extension from the [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/8d74682c-851e-4658-baaf-190ba11c1603)
+or get the [Previe build](http://vsixgallery.com/extension/63E411F1-E531-44E8-8689-16B34600CF25/).
 
 ---------------------------------------
 
-This sample demonstrates adding a glyph for lines that have 'ToDo' in them.
+![](https://i1.visualstudiogallery.msdn.s-msft.com/8d74682c-851e-4658-baaf-190ba11c1603/image/file/182444/1/preview2.png)
 
 # Changelog
 
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
 
-## 1.1
+## 0.3     
 
-**2016-02-13**
+Added new options in options panel (Tools -> Options... -> Stack Overflow Quick Launch Provider)
 
-- [x] Feature 3
-- [x] Feature 4
+Bug fixes
 
-## 1.0
+Updated error handing
 
-**2016-01-21**
+## 0.2
 
-- [x] Initial release
-- [x] Feature 1
-- [x] Feature 2
-  - [x] Sub feature
-  - 
-  
+Search now shows same results as stackoverflow.com with answers and questions.
+
+Under the hood improvements.
+
+## 0.1.2
+
+Visual Studio Community support
+
+## 0.1.1
+
+Visual Studio 2015 support & License added
+
+## 0.1
+
+- First preview release 
 
 ## Contribute
-Check out the [contribution guidelines](CONTRIBUTING.md)
-if you want to contribute to this project.
-
-For cloning and building this project yourself, make sure
-to install the
-[Extensibility Tools 2015](https://visualstudiogallery.msdn.microsoft.com/ab39a092-1343-46e2-b0f1-6a3f91155aa6)
-extension for Visual Studio which enables some features
-used by this project.
 
 ## License
 [The MIT License (MIT)](LICENSE)
