@@ -8,7 +8,7 @@ When you click on a selected search result you will be redirected to the Stack O
 This extension works with Visual Studio 2012, 2013 and 2015.
 
 Download this extension from the [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/8d74682c-851e-4658-baaf-190ba11c1603)
-or get the [Previe build](http://vsixgallery.com/extension/63E411F1-E531-44E8-8689-16B34600CF25/).
+or get the [Preview build](http://vsixgallery.com/extension/63E411F1-E531-44E8-8689-16B34600CF25/).
 
 ---------------------------------------
 
