@@ -83,6 +83,13 @@ namespace Aberus.StackOverflowQuickLaunch
                 return;
             }
 
+            if (searchResult.ErrorId.HasValue)
+            {
+                this.SetTaskStatus(VSConstants.VsSearchTaskStatus.Error);
+                this.SearchCallback.ReportComplete(this, this.SearchResults);
+                return;
+            }
+
             bool anyResults = false;
 
             if (searchResult != null && searchResult.Items.Length != 0)
@@ -115,7 +122,7 @@ namespace Aberus.StackOverflowQuickLaunch
             {
                 // Create and report new result
                 SearchCallback.ReportResult(this, 
-                    new StackOverflowSearchItemResult("Search Stack Overflow for '" + SearchQuery.SearchString + "'",
+                    new StackOverflowSearchItemResult("Search Online Stack Overflow for '" + SearchQuery.SearchString + "'",
                         string.Empty,
                         "http://stackoverflow.com/search?q=" + WebUtility.UrlEncode(SearchQuery.SearchString.Trim()),
                         null,
