@@ -14,7 +14,7 @@ This extension works with:
 [Download this extension](https://visualstudiogallery.msdn.microsoft.com/8d74682c-851e-4658-baaf-190ba11c1603) or 
 Get the [Preview build](http://vsixgallery.com/extension/63E411F1-E531-44E8-8689-16B34600CF25/).
 
-![](https://i1.visualstudiogallery.msdn.s-msft.com/8d74682c-851e-4658-baaf-190ba11c1603/image/file/182444/1/preview2.png)
+![](http://g.recordit.co/hoIWwpCt6A.gif)
 
 # Changelog
 
