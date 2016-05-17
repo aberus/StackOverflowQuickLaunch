@@ -50,4 +50,9 @@ on the official Visual Studio extension gallery.
 ## Contribute
 
 ## License
+
+The Stack Overflow name and logos are trademarks of Stack Exchange Inc. The names
+and logos for sites and products operating on the Stack Exchange network are also 
+trademarks of Stack Exchange Inc.
+
 [The MIT License (MIT)](LICENSE)
