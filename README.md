@@ -1,4 +1,4 @@
-# StackOverflowQuickLaunch
+# Stack Overflow Quick Launch Search Provider for Visual Studio
 
 Stack Overflow Quick Launch Provider allows you to search Stack Overflow within Visual Studio.
  
