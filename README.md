@@ -1,9 +1,12 @@
-# StackOverflowQuickLaunch
+# Stack Overflow Quick Launch Search Provider for Visual Studio
 
 Stack Overflow Quick Launch Provider allows you to search Stack Overflow within Visual Studio.
  
 Just press Ctrl + Q or click inside Quick Launch search box and start typing your question.
 When you click on a selected search result you will be redirected to the Stack Overflow's site.
+
+[Download this extension](https://visualstudiogallery.msdn.microsoft.com/8d74682c-851e-4658-baaf-190ba11c1603) or 
+get the [Preview build](http://vsixgallery.com/extension/63E411F1-E531-44E8-8689-16B34600CF25/).
 
 This extension works with:
 * Visual Studio 2012
@@ -11,10 +14,7 @@ This extension works with:
 * Visual Studio 2015
 * Visual Studio 15
 
-[Download this extension](https://visualstudiogallery.msdn.microsoft.com/8d74682c-851e-4658-baaf-190ba11c1603) or 
-Get the [Preview build](http://vsixgallery.com/extension/63E411F1-E531-44E8-8689-16B34600CF25/).
-
-![](https://i1.visualstudiogallery.msdn.s-msft.com/8d74682c-851e-4658-baaf-190ba11c1603/image/file/182444/1/preview2.png)
+![](http://g.recordit.co/hoIWwpCt6A.gif)
 
 # Changelog
 
@@ -50,4 +50,9 @@ on the official Visual Studio extension gallery.
 ## Contribute
 
 ## License
+
+The Stack Overflow name and logos are trademarks of Stack Exchange Inc. The names
+and logos for sites and products operating on the Stack Exchange network are also 
+trademarks of Stack Exchange Inc.
+
 [The MIT License (MIT)](LICENSE)
