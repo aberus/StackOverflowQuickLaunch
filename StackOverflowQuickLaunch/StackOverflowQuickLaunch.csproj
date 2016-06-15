@@ -144,10 +144,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="License.txt">
+    <None Include="License">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
+    </None>
     <Content Include="Resources\preview.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>

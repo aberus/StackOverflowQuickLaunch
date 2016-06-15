@@ -79,6 +79,8 @@ namespace Aberus.StackOverflowQuickLaunch
         }
     }
 
+    
+
     public enum Sort { 
         //[Description("(default)")]
         //None = 0,
