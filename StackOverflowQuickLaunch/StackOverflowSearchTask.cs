@@ -122,7 +122,7 @@ namespace Aberus.StackOverflowQuickLaunch
             {
                 // Create and report new result
                 SearchCallback.ReportResult(this, 
-                    new StackOverflowSearchItemResult("Search Online Stack Overflow for '" + SearchQuery.SearchString + "'",
+                    new StackOverflowSearchItemResult("Search Online on Stack Overflow for '" + SearchQuery.SearchString + "'",
                         string.Empty,
                         "http://stackoverflow.com/search?q=" + WebUtility.UrlEncode(SearchQuery.SearchString.Trim()),
                         null,

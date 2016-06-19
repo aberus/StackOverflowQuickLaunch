@@ -68,7 +68,7 @@ namespace Aberus.StackOverflowQuickLaunch
         [DataMember(Name = "last_activity_date")]
         public int? LastActivityDateJson { get; set; }
 
-        [IgnoreDataMember] //(Name = "last_activity_date")]
+        [IgnoreDataMember]
         public DateTime? LastActivityDate { get; set; }
 
         [DataMember(Name = "creation_date")]
@@ -85,16 +85,6 @@ namespace Aberus.StackOverflowQuickLaunch
 
         [DataMember(Name = "excerpt")]
         public string Excerpt { get; set; }
-
-        //[DataMember(Name = "last_edit_date")]
-        //public int LastEditDate { get; set; }
-
-
-        //[DataMember(Name = "protected_date")]
-        //public int? ProtectedDate { get; set; }
-
-        //[DataMember(Name = "accepted_answer_id")]
-        //public int? AcceptedAnswerId { get; set; }
 
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
@@ -123,10 +113,8 @@ namespace Aberus.StackOverflowQuickLaunch
             }
             catch (Exception)
             {
-                ItemType = ItemType.None;    
-                
-            }
-          
+                ItemType = ItemType.None;                 
+            }     
         }
     }
 
@@ -143,7 +131,12 @@ namespace Aberus.StackOverflowQuickLaunch
 
     public static class DataModelExtension
     {
-
+        /// <summary>
+        /// Converts field valute to enum of T based on EnumMemberAttribute.
+        /// </summary>
+        /// <typeparam name="T">The type of enum</typeparam>
+        /// <param name="value">The enum</param>
+        /// <returns>Mapped member of enum based on EnumMemberAttribute</returns>
         public static T ToEnum<T>(this string value) where T : struct, IConvertible
         {
             if (!typeof(T).IsEnum) 
@@ -163,7 +156,7 @@ namespace Aberus.StackOverflowQuickLaunch
                     }
                 }
             }
-            
+           
             return default(T);
         }
 
@@ -177,14 +170,12 @@ namespace Aberus.StackOverflowQuickLaunch
         /// </summary>
         /// <param name="aDate">DateTime to convert</param>
         /// <returns>Number of seconds passed since 1/1/1970 UTC </returns>
-        public static int ToInt(this DateTime aDate)
+        public static int ToTimestamp(this DateTime date)
         {
-            if (aDate == DateTime.MinValue)
-            {
+            if (date < UnixEpoch)
                 return -1;
-            }
 
-            TimeSpan span = (aDate - UnixEpoch);
+            TimeSpan span = date - UnixEpoch;
             
             return (int)Math.Floor(span.TotalSeconds);
         }
@@ -195,14 +186,12 @@ namespace Aberus.StackOverflowQuickLaunch
         /// </summary>
         /// <param name="anInt">Integer value to convert</param>
         /// <returns>DateTime for the Unix int time value</returns>
-        public static DateTime ToDateTime(this int anInt)
+        public static DateTime ToDateTime(this int timestamp)
         {
-            if (anInt == -1)
-            {
-                return DateTime.MinValue;
-            }
+            if (timestamp <= 0)
+                return UnixEpoch;
 
-            return UnixEpoch.AddSeconds(anInt);
+            return UnixEpoch.AddSeconds(timestamp);
         }
     }
 }
