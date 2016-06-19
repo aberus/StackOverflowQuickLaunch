@@ -21,6 +21,12 @@ This extension works with:
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
 
+## 0.4
+
+
+ - Visual Studio 15 support
+ - UI fixes 
+ 
 ## 0.3     
 
 - Added new options in options panel (Tools -> Options... -> Stack Overflow Quick Launch Provider)
