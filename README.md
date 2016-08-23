@@ -21,10 +21,16 @@ This extension works with:
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
 
+## 0.5
+
+  - Fixed when is no internet connection
+
+  - Bigger icon for new marketplace
+
 ## 0.4
 
-
  - Visual Studio 15 support
+
  - UI fixes 
  
 ## 0.3     
