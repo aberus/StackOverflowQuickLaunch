@@ -67,7 +67,9 @@ namespace Aberus.StackOverflowQuickLaunch
             {
                 this.ErrorCode = ex.HResult;
                 this.SetTaskStatus(VSConstants.VsSearchTaskStatus.Error);
-                this.SearchCallback.ReportComplete(this, this.SearchResults);
+                this.SearchCallback.ReportComplete(this, 0);
+
+                return;
             }
 
             // Check if the search was canceled
