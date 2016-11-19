@@ -12,7 +12,7 @@ namespace Aberus.StackOverflowQuickLaunch
     [Guid(GuidList.guidStackOverflowSearchProviderOptionString)]
     public class StackOverflowSearchOptionPage : DialogPage
     {
-        private Sort sort = Sort.Relevance;
+        Sort sort = Sort.Relevance;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Sort Sort
@@ -45,7 +45,6 @@ namespace Aberus.StackOverflowQuickLaunch
             }
         }
 
-
         int showResults = 40;
 
         //[Category("My Category")]
@@ -65,6 +64,40 @@ namespace Aberus.StackOverflowQuickLaunch
             }
         }
 
+        bool openInInternalBrowser = false;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool OpenInInternalBrowser
+        {
+            get
+            {
+                return openInInternalBrowser;
+            }
+            set
+            {
+                if (value != openInInternalBrowser)
+                    openInInternalBrowser = value;
+            }
+        }
+
+
+        bool openInNewTab = false;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool OpenInNewTab
+        {
+            get
+            {
+                return openInNewTab;
+            }
+            set
+            {
+                if (value != openInNewTab)
+                    openInNewTab = value;
+            }
+        }
+
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         protected override System.Windows.Forms.IWin32Window Window
@@ -76,6 +109,21 @@ namespace Aberus.StackOverflowQuickLaunch
                 page.Initialize();
                 return page;
             }
+        }
+
+        protected override void OnApply(PageApplyEventArgs e)
+        {
+            base.OnApply(e);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
         }
     }
 

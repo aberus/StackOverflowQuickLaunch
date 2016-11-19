@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.VisualStudio.Shell.Interop;
+using EnvDTE;
 
 namespace Aberus.StackOverflowQuickLaunch
 {
@@ -44,7 +45,18 @@ namespace Aberus.StackOverflowQuickLaunch
         public void InvokeAction()
         {
             // This function is called when the user selects the item result from the Quick Launch popup
-            Process.Start(Url);
+            if (StackOverflowQuickLaunchPackage.Instance.OptionPage.OpenInInternalBrowser)
+            {
+                var navigateOptions = StackOverflowQuickLaunchPackage.Instance.OptionPage.OpenInNewTab ? 
+                    vsNavigateOptions.vsNavigateOptionsNewWindow : vsNavigateOptions.vsNavigateOptionsDefault;
+
+                var dte = StackOverflowQuickLaunchPackage.GetGlobalService(typeof(DTE)) as DTE;
+                dte.ItemOperations.Navigate(Url, navigateOptions);
+            }
+            else
+            {
+                System.Diagnostics.Process.Start(Url);
+            }
         }
 
         public string PersistenceData { get; protected set; }

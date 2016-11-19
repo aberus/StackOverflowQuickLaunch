@@ -51,6 +51,19 @@ namespace Aberus.StackOverflowQuickLaunch
         {
             OptionsPage.AlwayShowLink = checkBox1.Checked;
         }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            OptionsPage.OpenInInternalBrowser = checkBox2.Checked;
+            checkBox3.Enabled = checkBox2.Checked;
+            if (!checkBox2.Checked)
+                checkBox3.Checked = false;
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            OptionsPage.OpenInNewTab = checkBox3.Checked;
+        }
     }
 
     /// <span class="code-SummaryComment"><summary></span>
