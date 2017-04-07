@@ -20,7 +20,7 @@ namespace Aberus.StackOverflowQuickLaunch
     [PackageRegistration(UseManagedResourcesOnly = true)]
     // This attribute is used to register the information needed to show this package
     // in the Help/About dialog of Visual Studio.
-    [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
+    [InstalledProductRegistration("#110", "#112", "0.6.0", IconResourceID = 400)]
     // Declare the package guid
     [Guid(GuidList.guidStackOverflowQuickLaunchQuickLaunchPkgString)]
     // Declare a global search provider supported by this package
@@ -29,6 +29,7 @@ namespace Aberus.StackOverflowQuickLaunch
     [ProvideSearchProvider(typeof(StackOverflowSearchProvider), "Stack Overflow Search Provider")]
     // Derive the package class from ExtensionPointPackage instead of Package
     // This will add support for automatic creation of the search provider as an extensibility point
+    [ProvideOptionPage(typeof(StackOverflowSearchOptionPage), "StackOverflowSearchProvider", "SearchSettings", 101, 102, true, new[] { "Stack Overflow", "StackOverflow", "Search" })]
     public sealed class StackOverflowQuickLaunchPackage : ExtensionPointPackage
     {
         /// <summary>
@@ -40,7 +41,7 @@ namespace Aberus.StackOverflowQuickLaunch
         /// </summary>
         public StackOverflowQuickLaunchPackage()
         {
-            Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", this.ToString()));
+            Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", this.ToString()));
         }
 
 
@@ -55,9 +56,23 @@ namespace Aberus.StackOverflowQuickLaunch
         /// </summary>
         protected override void Initialize()
         {
-            Trace.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
+            Debug.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
             base.Initialize();
+
+            Instance = this;
         }
+
+        public static StackOverflowQuickLaunchPackage Instance { get; private set; }
+
+        public StackOverflowSearchOptionPage OptionPage
+        {
+            get
+            {
+                var optionsPage = (StackOverflowSearchOptionPage)GetDialogPage(typeof(StackOverflowSearchOptionPage));
+                return optionsPage;
+            }
+        }
+
         #endregion
     }
 }

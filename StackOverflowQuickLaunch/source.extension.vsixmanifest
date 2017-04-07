@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="63E411F1-E531-44E8-8689-16B34600CF25" Version="0.1.2" Language="en-US" Publisher="Aleksander Berus" />
+    <Identity Id="63E411F1-E531-44E8-8689-16B34600CF25" Version="0.6.0" Language="en-US" Publisher="Aleksander Berus" />
     <DisplayName>Stack Overflow Quick Launch Search Provider</DisplayName>
     <Description xml:space="preserve">A Quick Launch search provider for searching Stack Overflow in Visual Studio</Description>
-    <License>License.txt</License>
+    <License>License</License>
     <Icon>Resources\StackOverflow.ico</Icon>
     <PreviewImage>Resources\preview.png</PreviewImage>
   </Metadata>
   <Installation InstalledByMsi="false">
-    <InstallationTarget Version="[11.0,13.0)" Id="Microsoft.VisualStudio.Ultimate" />
-    <InstallationTarget Version="[11.0,15.0)" Id="Microsoft.VisualStudio.Pro" />
-    <InstallationTarget Version="[11.0,13.0)" Id="Microsoft.VisualStudio.Premium" />
-    <InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.Enterprise" />
-    <InstallationTarget Version="[12.0,15.0)" Id="Microsoft.VisualStudio.Community" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="11.0" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="12.0" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="14.0" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="12.0" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="14.0" />
+    <InstallationTarget Id="Microsoft.VisualStudio.IntegratedShell" Version="14.0" />
   </Installation>
   <Dependencies>
     <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />

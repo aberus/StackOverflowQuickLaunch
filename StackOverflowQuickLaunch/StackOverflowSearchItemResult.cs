@@ -1,65 +1,87 @@
 ﻿using System.Diagnostics;
 using Microsoft.VisualStudio.Shell.Interop;
+using EnvDTE;
 
 namespace Aberus.StackOverflowQuickLaunch
 {
     class StackOverflowSearchItemResult : IVsSearchItemResult
     {
-        private string Url;
-
         public StackOverflowSearchItemResult(string name, string description, string url, IVsUIObject icon, IVsSearchProvider provider)
         {
             DisplayText = name;
             Url = url;
-            Icon = icon;
-            PersistenceData = name + "|" + Url;
             Description = description;
+            Icon = icon;
+            PersistenceData = name + "|" + url + "|" + description;
             SearchProvider = provider;
+        }
+
+        public string Url
+        {
+            get;
+            protected set;
         }
 
         #region IVsSearchItemResult
 
-        public Microsoft.VisualStudio.OLE.Interop.IDataObject DataObject
-        {
-            get { return null; }
+        public string Description
+        { 
+            get; 
+            protected set; 
         }
 
-        public string Description  { get; protected set; }
+        public string DisplayText 
+        { 
+            get; 
+            protected set; 
+        }
 
-        public string DisplayText { get; protected set; }
-
-        public IVsUIObject Icon { get; protected set; }
-/*        {
-            get 
-            {
-                if (item.Icon == null)
-                    return null;
-
-                // If all items returned from the search provider use the same icon, consider using a static member variable 
-                // (e.g. on the search provider class) to initialize and return the IVsUIObject - it will save time and memory 
-                // creating these objects.
-
-                // Helper classses in Microsoft.Internal.VisualStudio.PlatformUI can be used to construct IVsUIObject of VsUIType.Icon
-                // Use Win32IconUIObject if you have a HICON, use WinFormsIconUIObject if you have a System.Drawing.Icon, or
-                // use WpfPropertyValue.CreateIconObject() if you have a WPF ImageSource.
-                return new WinFormsIconUIObject(item.Icon);
-            }
-        }*/
+        public IVsUIObject Icon 
+        { 
+            get; 
+            protected set; 
+        }
 
         public void InvokeAction()
         {
-            Process.Start(Url);
             // This function is called when the user selects the item result from the Quick Launch popup
-            //System.Windows.Forms.MessageBox.Show( string.Format(Resources.SearchProviderResultInvoked, this.Item.Name));
+            if (StackOverflowQuickLaunchPackage.Instance.OptionPage.OpenInInternalBrowser)
+            {
+                var navigateOptions = StackOverflowQuickLaunchPackage.Instance.OptionPage.OpenInNewTab ? 
+                    vsNavigateOptions.vsNavigateOptionsNewWindow : vsNavigateOptions.vsNavigateOptionsDefault;
+
+                var dte = StackOverflowQuickLaunchPackage.GetGlobalService(typeof(DTE)) as DTE;
+                dte.ItemOperations.Navigate(Url, navigateOptions);
+            }
+            else
+            {
+                System.Diagnostics.Process.Start(Url);
+            }
         }
 
         public string PersistenceData { get; protected set; }
+        //public string PersistenceData
+        //{
+        //    get
+        //    {
+        //        // This is used for the MRU list.  We need to be able to fully recreate the result data.
+        //        return String.Join(Separator,
+        //                            EscapePersistenceString(this.DisplayText),
+        //                            EscapePersistenceString(this.Url),
+        //                            EscapePersistenceString(this.Tooltip));
+        //    }
+        //}
 
-        public IVsSearchProvider SearchProvider { get; private set; }
+        public IVsSearchProvider SearchProvider 
+        { 
+            get; 
+            private set; 
+        }
 
         public string Tooltip
         {
-            get { return null; }
+            get;
+            private set;
         }
 
         #endregion IVsSearchItemResult

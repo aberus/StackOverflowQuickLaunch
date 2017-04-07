@@ -11,5 +11,10 @@
         /// Guid of the Stack Overflow search provider
         /// </summary>
         public const string guidStackOverflowSearchProviderString = "6cbf93f5-b3ac-4fc0-96eb-4189576dc69f";
+
+        /// <summary>
+        /// Guid of the Stack Overflow search provider option page
+        /// </summary>
+        public const string guidStackOverflowSearchProviderOptionString = "34201D59-0E45-4BFB-A717-F2EC124886B4";
     };
 }

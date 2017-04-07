@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Microsoft.Internal.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio;
@@ -27,25 +28,48 @@ namespace Aberus.StackOverflowQuickLaunch
         /// </summary>
         protected async override void OnStartSearch()
         {
+            var sortQuery = "relevance";
+            int pageSize = 40;
+            bool alwaysShowLink = false;
+
+            var options = StackOverflowQuickLaunchPackage.Instance.OptionPage;
+            if (options != null)
+            {
+                sortQuery = options.Sort.ToString().ToLowerInvariant();
+                pageSize = options.ShowResults;
+                alwaysShowLink = options.AlwayShowLink;
+            }
+
             //// Get the tokens count in the query
-            //uint tokenCount = this.SearchQuery.GetTokens(0, null);
+            //uint tokenCount = SearchQuery.GetTokens(0, null);
             //// Get the tokens
             //IVsSearchToken[] tokens = new IVsSearchToken[tokenCount];
-            //this.SearchQuery.GetTokens(tokenCount, tokens);
+            //SearchQuery.GetTokens(tokenCount, tokens);
+            
             var cancellationSource = new CancellationTokenSource();
             var searchResult = (StackOverflowSearchResult)null;
-
-            var client = new HttpClient(
-                new HttpClientHandler
-                {
-                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-                });
-            //2.2/search/excerpts?order=desc&sort=relevance&site=stackoverflow&q=
-            using (var response = await client.GetAsync("http://api.stackexchange.com/2.2/search?site=stackoverflow&intitle=" + WebUtility.UrlEncode(SearchQuery.SearchString.Trim()), cancellationSource.Token))
-            using (var receiveStream = await response.Content.ReadAsStreamAsync())
+            try
             {
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(StackOverflowSearchResult));
-                searchResult = serializer.ReadObject(receiveStream) as StackOverflowSearchResult;
+               using(var client = new HttpClient(
+                    new HttpClientHandler
+                    {
+                        AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                    }
+                ))
+                using (var response = await client.GetAsync("http://api.stackexchange.com/2.2/search/excerpts?order=desc&pagesize=" + pageSize + "&sort=" + sortQuery + "&site=stackoverflow&q=" + WebUtility.UrlEncode(SearchQuery.SearchString.Trim()), cancellationSource.Token))
+                using (var receiveStream = await response.Content.ReadAsStreamAsync())
+                {
+                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(StackOverflowSearchResult));
+                    searchResult = serializer.ReadObject(receiveStream) as StackOverflowSearchResult;
+                }
+            }
+            catch(Exception ex)
+            {
+                this.ErrorCode = ex.HResult;
+                this.SetTaskStatus(VSConstants.VsSearchTaskStatus.Error);
+                this.SearchCallback.ReportComplete(this, 0);
+
+                return;
             }
 
             // Check if the search was canceled
@@ -61,16 +85,27 @@ namespace Aberus.StackOverflowQuickLaunch
                 return;
             }
 
-            if (searchResult != null && searchResult.Items.Count != 0)
+            if (searchResult.ErrorId.HasValue)
             {
-                var results = searchResult.Items.Take(100).ToArray();
+                this.SetTaskStatus(VSConstants.VsSearchTaskStatus.Error);
+                this.SearchCallback.ReportComplete(this, this.SearchResults);
+                return;
+            }
+
+            bool anyResults = false;
+
+            if (searchResult != null && searchResult.Items.Length != 0)
+            {
+                anyResults = true;
+                var results = searchResult.Items.Take(pageSize).ToArray();
 
                 // Since we know how many items we have, we can report progress
                 for (int itemIndex = 0; itemIndex < results.Length; itemIndex++)
                 {
                     var itemResult = new StackOverflowSearchItemResult(
-                        WebUtility.HtmlDecode(results[itemIndex].Title),
-                        results[itemIndex].Link,
+                        (results[itemIndex].ItemType == ItemType.Question ? "Q: " : "A: ") + WebUtility.HtmlDecode(results[itemIndex].Title),
+                        FormatExcerpt(WebUtility.HtmlDecode(results[itemIndex].Excerpt)).Trim(),
+                        "http://stackoverflow.com/questions/" + results[itemIndex].QuestionId,
                         new WinFormsIconUIObject(Resources.StackOverflow),
                         searchProvider);
 
@@ -84,16 +119,18 @@ namespace Aberus.StackOverflowQuickLaunch
                     SearchCallback.ReportProgress(this, (uint) (itemIndex + 1), (uint) results.Length);
                 }
             }
-            else
+            
+            if(!anyResults || alwaysShowLink)
             {
                 // Create and report new result
                 SearchCallback.ReportResult(this, 
-                    new StackOverflowSearchItemResult("Search Stack Overflow for '" + SearchQuery.SearchString + "'",
+                    new StackOverflowSearchItemResult("Search Online on Stack Overflow for '" + SearchQuery.SearchString + "'",
+                        string.Empty,
                         "http://stackoverflow.com/search?q=" + WebUtility.UrlEncode(SearchQuery.SearchString.Trim()),
                         null,
                         searchProvider));
 
-                // Since we know how many items we have, we can report progress
+                // Only one result
                 SearchCallback.ReportComplete(this, 1);
             }
 
@@ -101,9 +138,20 @@ namespace Aberus.StackOverflowQuickLaunch
             base.OnStartSearch();
         }
 
+        private string FormatExcerpt(string excerpt)
+        {
+            var removedNewLines = Regex.Replace(excerpt, @"(\t|\n|\r|\s){1,}", " ");
+            string pattern = "<span class=\"highlight\">|</span>";
+            var regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            return regex.Replace(removedNewLines, String.Empty);
+        }
+
         protected new IVsSearchProviderCallback SearchCallback
         {
-            get { return (IVsSearchProviderCallback) base.SearchCallback; }
+            get 
+            { 
+                return (IVsSearchProviderCallback) base.SearchCallback; 
+            }
         }
 
         // No need to override OnStopSearch in this case, we'll check the task status to see if the search was canceled
