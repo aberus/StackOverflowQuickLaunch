@@ -12,7 +12,7 @@ This extension works with:
 * Visual Studio 2012
 * Visual Studio 2013
 * Visual Studio 2015
-* Visual Studio 2017 RC
+* Visual Studio 2017 (coming in version 0.7)
 
 ![](http://g.recordit.co/hoIWwpCt6A.gif)
 
@@ -23,7 +23,7 @@ on the official Visual Studio extension gallery.
 
 ## 0.6
 
-  - Open results in Internal Web Browser
+  - Open results in Internal Web Browser (thx to [@ketankshukla](https://github.com/aberus/StackOverflowQuickLaunch/pull/1))
 
 ## 0.5
 
