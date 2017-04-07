@@ -23,7 +23,8 @@ on the official Visual Studio extension gallery.
 
 ## 0.6
 
-  - Open results in Internal Web Browser (thx to [@ketankshukla](https://github.com/aberus/StackOverflowQuickLaunch/pull/1))
+  - Open results in Internal Web Browser (thx to [@ketankshukla](https://github.com/aberus/StackOverflowQuickLaunch/pull/1))   
+  (Tools -> Options... -> Stack Overflow Search Provider -> Search Settings -> Open results in Internal Web Browser)
 
 ## 0.5
 
