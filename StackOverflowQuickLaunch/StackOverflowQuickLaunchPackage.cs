@@ -20,16 +20,16 @@ namespace Aberus.StackOverflowQuickLaunch
     [PackageRegistration(UseManagedResourcesOnly = true)]
     // This attribute is used to register the information needed to show this package
     // in the Help/About dialog of Visual Studio.
-    [InstalledProductRegistration("#110", "#112", "0.6.0", IconResourceID = 400)]
+    [InstalledProductRegistration("#110", "#112", "0.6.1", IconResourceID = 400)]
     // Declare the package guid
     [Guid(GuidList.guidStackOverflowQuickLaunchQuickLaunchPkgString)]
     // Declare a global search provider supported by this package
     // This will write the necessary registry keys for the provider's declaration and will be used to create the provider
     // when the package extensibility point for IVsSearchProvider is requested
     [ProvideSearchProvider(typeof(StackOverflowSearchProvider), "Stack Overflow Search Provider")]
+    [ProvideOptionPage(typeof(StackOverflowSearchOptionPage), "StackOverflowSearchProvider", "SearchSettings", 101, 102, true, new[] { "Stack Overflow", "StackOverflow", "Search" })]
     // Derive the package class from ExtensionPointPackage instead of Package
     // This will add support for automatic creation of the search provider as an extensibility point
-    [ProvideOptionPage(typeof(StackOverflowSearchOptionPage), "StackOverflowSearchProvider", "SearchSettings", 101, 102, true, new[] { "Stack Overflow", "StackOverflow", "Search" })]
     public sealed class StackOverflowQuickLaunchPackage : ExtensionPointPackage
     {
         /// <summary>
