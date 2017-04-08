@@ -28,6 +28,7 @@ namespace Aberus.StackOverflowQuickLaunch
     // when the package extensibility point for IVsSearchProvider is requested
     [ProvideSearchProvider(typeof(StackOverflowSearchProvider), "Stack Overflow Search Provider")]
     [ProvideOptionPage(typeof(StackOverflowSearchOptionPage), "StackOverflowSearchProvider", "SearchSettings", 101, 102, true, new[] { "Stack Overflow", "StackOverflow", "Search" })]
+    [ProvideMenuResource("Menus.ctmenu", 1)]
     // Derive the package class from ExtensionPointPackage instead of Package
     // This will add support for automatic creation of the search provider as an extensibility point
     public sealed class StackOverflowQuickLaunchPackage : ExtensionPointPackage
@@ -60,6 +61,7 @@ namespace Aberus.StackOverflowQuickLaunch
             base.Initialize();
 
             Instance = this;
+            Aberus.StackOverflowQuickLaunch.StackOverflowSearchErrorListCommand.Initialize(this);
         }
 
         public static StackOverflowQuickLaunchPackage Instance { get; private set; }
