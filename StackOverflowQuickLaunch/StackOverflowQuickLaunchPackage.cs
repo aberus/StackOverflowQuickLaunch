@@ -27,9 +27,9 @@ namespace Aberus.StackOverflowQuickLaunch
     // This will write the necessary registry keys for the provider's declaration and will be used to create the provider
     // when the package extensibility point for IVsSearchProvider is requested
     [ProvideSearchProvider(typeof(StackOverflowSearchProvider), "Stack Overflow Search Provider")]
+    [ProvideOptionPage(typeof(StackOverflowSearchOptionPage), "StackOverflowSearchProvider", "SearchSettings", 101, 102, true, new[] { "Stack Overflow", "StackOverflow", "Search" })]
     // Derive the package class from ExtensionPointPackage instead of Package
     // This will add support for automatic creation of the search provider as an extensibility point
-    [ProvideOptionPage(typeof(StackOverflowSearchOptionPage), "StackOverflowSearchProvider", "SearchSettings", 101, 102, true, new[] { "Stack Overflow", "StackOverflow", "Search" })]
     public sealed class StackOverflowQuickLaunchPackage : ExtensionPointPackage
     {
         /// <summary>
