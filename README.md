@@ -12,7 +12,7 @@ This extension works with:
 * Visual Studio 2012
 * Visual Studio 2013
 * Visual Studio 2015
-* Visual Studio 2017 (coming in version 0.7)
+* Visual Studio 2017
 
 ![](http://g.recordit.co/hoIWwpCt6A.gif)
 
@@ -20,6 +20,10 @@ This extension works with:
 
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
+
+## 0.6.1
+
+- Visual Studio 2017 support
 
 ## 0.6
 
