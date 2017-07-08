@@ -42,21 +42,12 @@ namespace Aberus.StackOverflowQuickLaunch
             protected set; 
         }
 
+        // This function is called when the user selects the item result from the Quick Launch popup
         public void InvokeAction()
         {
-            // This function is called when the user selects the item result from the Quick Launch popup
-            if (StackOverflowQuickLaunchPackage.Instance.OptionPage.OpenInInternalBrowser)
-            {
-                var navigateOptions = StackOverflowQuickLaunchPackage.Instance.OptionPage.OpenInNewTab ? 
-                    vsNavigateOptions.vsNavigateOptionsNewWindow : vsNavigateOptions.vsNavigateOptionsDefault;
-
-                var dte = StackOverflowQuickLaunchPackage.GetGlobalService(typeof(DTE)) as DTE;
-                dte.ItemOperations.Navigate(Url, navigateOptions);
-            }
-            else
-            {
-                System.Diagnostics.Process.Start(Url);
-            }
+            Browser.Open(Url, 
+                StackOverflowQuickLaunchPackage.Instance.OptionPage.OpenInInternalBrowser, 
+                StackOverflowQuickLaunchPackage.Instance.OptionPage.OpenInNewTab);
         }
 
         public string PersistenceData { get; protected set; }

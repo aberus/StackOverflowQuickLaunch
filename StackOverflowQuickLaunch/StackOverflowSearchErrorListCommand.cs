@@ -8,6 +8,7 @@ using System;
 using System.ComponentModel.Design;
 using System.Globalization;
 using System.Net;
+using System.Text.RegularExpressions;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -42,13 +43,11 @@ namespace Aberus.StackOverflowQuickLaunch
         private StackOverflowSearchErrorListCommand(Package package)
         {
             if (package == null)
-            {
                 throw new ArgumentNullException("package");
-            }
 
             this.package = package;
 
-            OleMenuCommandService commandService = this.ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            var commandService = this.ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (commandService != null)
             {
                 var menuCommandID = new CommandID(CommandSet, CommandId);
@@ -95,32 +94,22 @@ namespace Aberus.StackOverflowQuickLaunch
         /// <param name="e">Event args.</param>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            //string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            //string title = "StackOverflowSearchErrorListCommand";
-
-            DTE2 dte;
-
-            dte = (DTE2)this.ServiceProvider.GetService(typeof(EnvDTE.DTE));
+            DTE2 dte = (DTE2)this.ServiceProvider.GetService(typeof(EnvDTE.DTE));
             var errorList = dte.ToolWindows.ErrorList as IErrorList;
             var selected = errorList.TableControl.SelectedEntry;
             if (selected != null)
             {
-                if (selected.TryGetValue("errorcode", out object code) && selected.TryGetValue("text", out object description))
+                if (selected.TryGetValue("errorcode", out object code) && selected.TryGetValue("text", out object text))
                 {
-                    var url = "http://stackoverflow.com/search?q=" + WebUtility.UrlEncode($"{code}: {description}");
-                    System.Diagnostics.Process.Start(url);
-                    //return (string)content;
+                    string description = (string)text;
+                    description = Regex.Replace(description, "'.*'", "''", RegexOptions.IgnoreCase);
+                    
+                    string url = "http://stackoverflow.com/search?q=" + WebUtility.UrlEncode($"{code}: {description}");
+                    Browser.Open(url,
+                        ((StackOverflowQuickLaunchPackage)package).OptionPage.OpenInInternalBrowser,
+                        ((StackOverflowQuickLaunchPackage)package).OptionPage.OpenInNewTab);
                 }
             }
-
-            //// Show a message box to prove we were here
-            //VsShellUtilities.ShowMessageBox(
-            //    this.ServiceProvider,
-            //    message,
-            //    title,
-            //    OLEMSGICON.OLEMSGICON_INFO,
-            //    OLEMSGBUTTON.OLEMSGBUTTON_OK,
-            //    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
         }
     }
 }

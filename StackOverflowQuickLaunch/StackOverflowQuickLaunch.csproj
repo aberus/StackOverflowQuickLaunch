@@ -177,6 +177,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Browser.cs" />
     <Compile Include="Guids.cs" />
     <Compile Include="StackOverflowSearchErrorListCommand.cs" />
     <Compile Include="StackOverflowSearchOptionPage.cs">
@@ -235,10 +236,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Resource Include="Resources\IconCommand.png" />
     <Content Include="Resources\preview.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Resource Include="Resources\StackOverflow-16.png" />
     <Content Include="Resources\StackOverflow.ico">
       <IncludeInVSIX>true</IncludeInVSIX>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
