@@ -14,12 +14,19 @@ This extension works with:
 * Visual Studio 2015
 * Visual Studio 2017
 
-![](http://g.recordit.co/hoIWwpCt6A.gif)
+![](https://i1.visualstudiogallery.msdn.s-msft.com/8d74682c-851e-4658-baaf-190ba11c1603/image/file/217011/1/hoiwwpct6a.gif)
+
+
+![](https://i1.visualstudiogallery.msdn.s-msft.com/8d74682c-851e-4658-baaf-190ba11c1603/image/file/270534/1/screenshot-errorlist.png)
 
 # Changelog
 
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
+
+## 0.7
+
+ - Search errors from Error List
 
 ## 0.6.1
 
