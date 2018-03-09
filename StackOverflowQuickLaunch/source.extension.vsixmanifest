@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="63E411F1-E531-44E8-8689-16B34600CF25" Version="0.7.0" Language="en-US" Publisher="Aleksander Berus" />
+    <Identity Id="63E411F1-E531-44E8-8689-16B34600CF25" Version="0.8.0" Language="en-US" Publisher="Aleksander Berus" />
     <DisplayName>Stack Overflow Quick Launch Search Provider</DisplayName>
     <Description xml:space="preserve">A Quick Launch search provider for searching Stack Overflow in Visual Studio</Description>
+    <MoreInfo>https://github.com/aberus/StackOverflowQuickLaunch</MoreInfo>
     <License>License.txt</License>
-    <Icon>Resources\StackOverflow.ico</Icon>
-    <PreviewImage>Resources\preview.png</PreviewImage>
+    <Icon>Resources\Logo_128x.png</Icon>
+    <PreviewImage>Resources\Preview_200x.png</PreviewImage>
   </Metadata>
   <Installation InstalledByMsi="false">
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="11.0" />

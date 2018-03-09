@@ -10,9 +10,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Stack Overflow Quick Launch Search Provider")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("aberus.com")]
+[assembly: AssemblyCompany("Aleksander Berus")]
 [assembly: AssemblyProduct("Stack Overflow Quick Launch Search Provider")]
-[assembly: AssemblyCopyright("Copyright © aberus.com 2014-2017")]
+[assembly: AssemblyCopyright("Copyright © Aleksander Berus 2014-2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]   
 [assembly: ComVisible(false)]     
@@ -28,8 +28,8 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("0.7.0.0")]
-[assembly: AssemblyFileVersion("0.7.0.0")]
+[assembly: AssemblyVersion("0.8.0.0")]
+[assembly: AssemblyFileVersion("0.8.0.0")]
 
 
 
