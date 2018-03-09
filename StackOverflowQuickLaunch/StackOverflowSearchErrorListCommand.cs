@@ -42,10 +42,7 @@ namespace Aberus.StackOverflowQuickLaunch
         /// <param name="package">Owner package, not null.</param>
         private StackOverflowSearchErrorListCommand(Package package)
         {
-            if (package == null)
-                throw new ArgumentNullException("package");
-
-            this.package = package;
+            this.package = package ?? throw new ArgumentNullException(nameof(package));
 
             var commandService = this.ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (commandService != null)
@@ -94,17 +91,18 @@ namespace Aberus.StackOverflowQuickLaunch
         /// <param name="e">Event args.</param>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            DTE2 dte = (DTE2)this.ServiceProvider.GetService(typeof(EnvDTE.DTE));
-            var errorList = dte.ToolWindows.ErrorList as IErrorList;
-            var selected = errorList.TableControl.SelectedEntry;
-            if (selected != null)
+            var dte = this.ServiceProvider.GetService(typeof(EnvDTE.DTE)) as DTE2;
+            if (dte != null)
             {
-                if (selected.TryGetValue("errorcode", out object code) && selected.TryGetValue("text", out object text))
+                var errorList = dte.ToolWindows.ErrorList as IErrorList;
+                var selected = errorList?.TableControl?.SelectedEntry;
+                if (selected != null && selected.TryGetValue("text", out object text))
                 {
                     string description = (string)text;
-                    description = Regex.Replace(description, "'.*'", "''", RegexOptions.IgnoreCase);
-                    
-                    string url = "http://stackoverflow.com/search?q=" + WebUtility.UrlEncode($"{code}: {description}");
+                    description = Regex.Replace(description, "\\s'.*'\\s", " ", RegexOptions.IgnoreCase);
+
+                    string searchQuery = selected.TryGetValue("errorcode", out object code) ? $"{code}: {description}" : description;
+                    string url = "http://stackoverflow.com/search?q=" + WebUtility.UrlEncode(searchQuery);
                     Browser.Open(url,
                         ((StackOverflowQuickLaunchPackage)package).OptionPage.OpenInInternalBrowser,
                         ((StackOverflowQuickLaunchPackage)package).OptionPage.OpenInNewTab);
