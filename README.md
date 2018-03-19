@@ -1,4 +1,4 @@
-# Stack Overflow Quick Launch Search Provider for Visual Studio
+## Stack Overflow Quick Launch Search Provider for Visual Studio
 
 Stack Overflow Quick Launch Provider allows you to search Stack Overflow within Visual Studio.
  
@@ -19,63 +19,59 @@ This extension works with:
 
 ![](https://i1.visualstudiogallery.msdn.s-msft.com/8d74682c-851e-4658-baaf-190ba11c1603/image/file/270534/1/screenshot-errorlist.png)
 
-# Changelog
+## Changelog
 
-These are the changes to each version that has been released
-on the official Visual Studio extension gallery.
+These are the changes to each version that has been released.
 
-## 0.7
+### 0.8
 
- - Search errors from Error List
+* Fixes for context menu in Error list
+* Bigger icon for marketplace
 
-## 0.6.1
+### 0.7
 
-- Visual Studio 2017 support
+* Search errors from Error List
 
-## 0.6
+### 0.6.1
 
-  - Open results in Internal Web Browser (thx to [@ketankshukla](https://github.com/aberus/StackOverflowQuickLaunch/pull/1))   
+* Visual Studio 2017 support
+
+### 0.6
+
+* Open results in Internal Web Browser (thx to [@ketankshukla](https://github.com/aberus/StackOverflowQuickLaunch/pull/1))   
   (Tools -> Options... -> Stack Overflow Search Provider -> Search Settings -> Open results in Internal Web Browser)
 
-## 0.5
+### 0.5
 
-  - Fixed when is no internet connection
+* Fixed when is no internet connection
 
-  - Bigger icon for new marketplace
+### 0.4
 
-## 0.4
+* Visual Studio 15 support
+* UI fixes
 
- - Visual Studio 15 support
+### 0.3
 
- - UI fixes 
- 
-## 0.3     
+* Added new options in options panel (Tools -> Options... -> Stack Overflow Quick Launch Provider)
+* Bug fixes
+* Updated error handing
 
-- Added new options in options panel (Tools -> Options... -> Stack Overflow Quick Launch Provider)
+### 0.2
 
-- Bug fixes
+* Search now shows same results as stackoverflow.com with answers and questions.
+* Under the hood improvements.
 
-- Updated error handing
+### 0.1.2
 
-## 0.2
+* Visual Studio Community support
 
-- Search now shows same results as stackoverflow.com with answers and questions.
+### 0.1.1
 
-- Under the hood improvements.
+* Visual Studio 2015 support & License added
 
-## 0.1.2
+### 0.1
 
-- Visual Studio Community support
-
-## 0.1.1
-
-- Visual Studio 2015 support & License added
-
-## 0.1
-
-- First preview release 
-
-## Contribute
+* First preview release
 
 ## License
 
