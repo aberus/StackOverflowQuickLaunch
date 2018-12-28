@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using Microsoft.VisualStudio.Shell.Interop;
-using EnvDTE;
+﻿using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Aberus.StackOverflowQuickLaunch
 {

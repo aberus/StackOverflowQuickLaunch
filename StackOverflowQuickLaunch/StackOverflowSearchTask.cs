@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -56,7 +55,7 @@ namespace Aberus.StackOverflowQuickLaunch
                         AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
                     }
                 ))
-                using (var response = await client.GetAsync("http://api.stackexchange.com/2.2/search/excerpts?order=desc&pagesize=" + pageSize + "&sort=" + sortQuery + "&site=stackoverflow&q=" + WebUtility.UrlEncode(SearchQuery.SearchString.Trim()), cancellationSource.Token))
+                using (var response = await client.GetAsync("https://api.stackexchange.com/2.2/search/excerpts?order=desc&pagesize=" + pageSize + "&sort=" + sortQuery + "&site=stackoverflow&q=" + WebUtility.UrlEncode(SearchQuery.SearchString.Trim()), cancellationSource.Token))
                 using (var receiveStream = await response.Content.ReadAsStreamAsync())
                 {
                     DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(StackOverflowSearchResult));
@@ -105,7 +104,7 @@ namespace Aberus.StackOverflowQuickLaunch
                     var itemResult = new StackOverflowSearchItemResult(
                         (results[itemIndex].ItemType == ItemType.Question ? "Q: " : "A: ") + WebUtility.HtmlDecode(results[itemIndex].Title),
                         FormatExcerpt(WebUtility.HtmlDecode(results[itemIndex].Excerpt)).Trim(),
-                        "http://stackoverflow.com/questions/" + results[itemIndex].QuestionId,
+                        "https://stackoverflow.com/questions/" + results[itemIndex].QuestionId,
                         new WinFormsIconUIObject(Resources.StackOverflow),
                         searchProvider);
 
@@ -126,7 +125,7 @@ namespace Aberus.StackOverflowQuickLaunch
                 SearchCallback.ReportResult(this, 
                     new StackOverflowSearchItemResult("Search Online on Stack Overflow for '" + SearchQuery.SearchString + "'",
                         string.Empty,
-                        "http://stackoverflow.com/search?q=" + WebUtility.UrlEncode(SearchQuery.SearchString.Trim()),
+                        "https://stackoverflow.com/search?q=" + WebUtility.UrlEncode(SearchQuery.SearchString.Trim()),
                         null,
                         searchProvider));
 

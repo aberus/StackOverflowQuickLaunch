@@ -6,12 +6,10 @@
 
 using System;
 using System.ComponentModel.Design;
-using System.Globalization;
 using System.Net;
 using System.Text.RegularExpressions;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Aberus.StackOverflowQuickLaunch
 {
@@ -99,10 +97,10 @@ namespace Aberus.StackOverflowQuickLaunch
                 if (selected != null && selected.TryGetValue("text", out object text))
                 {
                     string description = (string)text;
-                    description = Regex.Replace(description, "\\s'.*'\\s", " ", RegexOptions.IgnoreCase);
+                    description = Regex.Replace(description, "'.*'", "''", RegexOptions.IgnoreCase);
 
                     string searchQuery = selected.TryGetValue("errorcode", out object code) ? $"{code}: {description}" : description;
-                    string url = "http://stackoverflow.com/search?q=" + WebUtility.UrlEncode(searchQuery);
+                    string url = "https://stackoverflow.com/search?q=" + WebUtility.UrlEncode(searchQuery);
                     Browser.Open(url,
                         ((StackOverflowQuickLaunchPackage)package).OptionPage.OpenInInternalBrowser,
                         ((StackOverflowQuickLaunchPackage)package).OptionPage.OpenInNewTab);
