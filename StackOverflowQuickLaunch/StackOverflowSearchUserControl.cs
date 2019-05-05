@@ -17,7 +17,6 @@ namespace Aberus.StackOverflowQuickLaunch
         public StackOverflowSearchUserControl()
         {
             InitializeComponent();
-           // this.Initialize();
         }
 
         public void Initialize()
@@ -30,6 +29,9 @@ namespace Aberus.StackOverflowQuickLaunch
             this.numericUpDown1.Value = OptionsPage.ShowResults;
 
             this.checkBox1.Checked = OptionsPage.AlwayShowLink;
+            this.checkBox2.Checked = OptionsPage.OpenInInternalBrowser;
+            this.checkBox3.Checked = OptionsPage.OpenInNewTab;
+            this.checkBox4.Checked = OptionsPage.UseGenericSearch;
         }
 
         public StackOverflowSearchOptionPage OptionsPage { get; set; }
@@ -37,7 +39,7 @@ namespace Aberus.StackOverflowQuickLaunch
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
             Sort sort;
-            Enum.TryParse<Sort>(comboBox1.SelectedValue.ToString(), out sort);
+            Enum.TryParse(comboBox1.SelectedValue.ToString(), out sort);
 
             OptionsPage.Sort = sort;
         }
@@ -63,6 +65,11 @@ namespace Aberus.StackOverflowQuickLaunch
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
             OptionsPage.OpenInNewTab = checkBox3.Checked;
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            OptionsPage.UseGenericSearch = checkBox4.Checked;
         }
     }
 

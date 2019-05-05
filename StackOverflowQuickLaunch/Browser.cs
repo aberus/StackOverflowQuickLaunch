@@ -1,4 +1,6 @@
-﻿using EnvDTE;
+﻿using System.Diagnostics;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Aberus.StackOverflowQuickLaunch
 {
@@ -8,14 +10,14 @@ namespace Aberus.StackOverflowQuickLaunch
         {
             if(openInInternalBrowser)
             {
-                var navigateOptions = newWindow ? vsNavigateOptions.vsNavigateOptionsNewWindow : vsNavigateOptions.vsNavigateOptionsDefault;
+                uint navigateOptions = newWindow ? (uint)__VSWBNAVIGATEFLAGS.VSNWB_ForceNew : 0u;
 
-                var dte = StackOverflowQuickLaunchPackage.GetGlobalService(typeof(DTE)) as DTE;
-                dte.ItemOperations.Navigate(url, navigateOptions);
+                var webBrowsingService = Package.GetGlobalService(typeof(IVsWebBrowsingService)) as IVsWebBrowsingService;
+                webBrowsingService.Navigate(url, navigateOptions, out IVsWindowFrame ppFrame);
             }
             else
             {
-                System.Diagnostics.Process.Start(url);
+                Process.Start(url);
             }
         }
     }

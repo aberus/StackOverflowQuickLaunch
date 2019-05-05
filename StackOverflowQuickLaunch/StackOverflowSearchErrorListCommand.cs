@@ -97,7 +97,8 @@ namespace Aberus.StackOverflowQuickLaunch
                 if (selected != null && selected.TryGetValue("text", out object text))
                 {
                     string description = (string)text;
-                    description = Regex.Replace(description, "'.*'", "''", RegexOptions.IgnoreCase);
+                    if(((StackOverflowQuickLaunchPackage)package).OptionPage.UseGenericSearch)
+                        description = Regex.Replace(description, "'.*'", "''", RegexOptions.IgnoreCase);
 
                     string searchQuery = selected.TryGetValue("errorcode", out object code) ? $"{code}: {description}" : description;
                     string url = "https://stackoverflow.com/search?q=" + WebUtility.UrlEncode(searchQuery);

@@ -47,9 +47,6 @@ namespace Aberus.StackOverflowQuickLaunch
 
         int showResults = 40;
 
-        //[Category("My Category")]
-        //[DisplayName("My Integer Option")]
-        //[Description("My integer option")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public int ShowResults
         {
@@ -98,6 +95,22 @@ namespace Aberus.StackOverflowQuickLaunch
         }
 
 
+        bool useGenericSearch = false;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public bool UseGenericSearch
+        {
+            get
+            {
+                return useGenericSearch;
+            }
+            set
+            {
+                if (value != useGenericSearch)
+                    useGenericSearch = value;
+            }
+        }
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         protected override System.Windows.Forms.IWin32Window Window
@@ -126,8 +139,6 @@ namespace Aberus.StackOverflowQuickLaunch
             base.Dispose(disposing);
         }
     }
-
-    
 
     public enum Sort { 
         //[Description("(default)")]
