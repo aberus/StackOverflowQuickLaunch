@@ -5,22 +5,32 @@ Stack Overflow Quick Launch Provider allows you to search Stack Overflow within 
 Just press Ctrl + Q or click inside Quick Launch search box and start typing your question.
 When you select a search result you will be redirected to the Stack Overflow's site.
 
-[Download this extension](https://marketplace.visualstudio.com/items?itemName=AleksanderBerus.StackOverflowQuickLaunchSearchProvider) on Visual Studio Marketplace or get the [Preview build](http://vsixgallery.com/extension/63E411F1-E531-44E8-8689-16B34600CF25/).
+[Download this extension](https://marketplace.visualstudio.com/items?itemName=AleksanderBerus.StackOverflowQuickLaunchSearchProvider) on Visual Studio Marketplace.
 
 This extension works with:
 * Visual Studio 2012
 * Visual Studio 2013
 * Visual Studio 2015
 * Visual Studio 2017
+* Visual Studio 2019
 
-![](https://i1.visualstudiogallery.msdn.s-msft.com/8d74682c-851e-4658-baaf-190ba11c1603/image/file/217011/1/hoiwwpct6a.gif)
+![Quick search in Visual Studio with Stack Overflow](https://aleksanderberus.gallerycdn.vsassets.io/extensions/aleksanderberus/stackoverflowquicklaunchsearchprovider/1.0.0/1557062239669/217011/1/hoIWwpCt6A.gif)
 
-
-![](https://i1.visualstudiogallery.msdn.s-msft.com/8d74682c-851e-4658-baaf-190ba11c1603/image/file/270534/1/screenshot-errorlist.png)
+![Error List](https://aleksanderberus.gallerycdn.vsassets.io/extensions/aleksanderberus/stackoverflowquicklaunchsearchprovider/1.0.0/1557062239669/270546/1/Screenshot-ErrorList2.png)
 
 ## Changelog
 
 These are the changes to each version that has been released.
+
+## 1.0
+
+* Support for VS 2019
+* Bug fixes
+* Option to switch on/of generic search for errors (Remove literals) 
+
+### 0.9 
+
+* HTTPS calls
 
 ### 0.8
 
