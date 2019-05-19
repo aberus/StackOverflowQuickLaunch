@@ -123,7 +123,7 @@ namespace Aberus.StackOverflowQuickLaunch
             {
                 // Create and report new result
                 SearchCallback.ReportResult(this, 
-                    new StackOverflowSearchItemResult("Search Online on Stack Overflow for '" + SearchQuery.SearchString + "'",
+                    new StackOverflowSearchItemResult($"Search Online on Stack Overflow for '{SearchQuery.SearchString}'",
                         string.Empty,
                         "https://stackoverflow.com/search?q=" + WebUtility.UrlEncode(SearchQuery.SearchString.Trim()),
                         null,
@@ -139,10 +139,9 @@ namespace Aberus.StackOverflowQuickLaunch
 
         private string FormatExcerpt(string excerpt)
         {
+            var highlightRegex = new Regex("<span class=\"highlight\">|</span>", RegexOptions.IgnoreCase);
             var removedNewLines = Regex.Replace(excerpt, @"(\t|\n|\r|\s){1,}", " ");
-            string pattern = "<span class=\"highlight\">|</span>";
-            var regex = new Regex(pattern, RegexOptions.IgnoreCase);
-            return regex.Replace(removedNewLines, String.Empty);
+            return highlightRegex.Replace(removedNewLines, string.Empty);
         }
 
         protected new IVsSearchProviderCallback SearchCallback

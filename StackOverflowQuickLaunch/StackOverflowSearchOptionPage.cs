@@ -140,14 +140,12 @@ namespace Aberus.StackOverflowQuickLaunch
         }
     }
 
-    public enum Sort { 
-        //[Description("(default)")]
-        //None = 0,
-        [Description("Active")]
-        Activity = 4, 
-        Votes = 3,
-        [Description("Newest")]
-        Creation = 2, 
+    public enum Sort {
         Relevance = 1,
+        [Description("Newest")]
+        Creation = 2,
+        [Description("Active")]
+        Activity = 3,
+        Votes = 4,
     }; 
 }
