@@ -20,7 +20,7 @@ namespace Aberus.StackOverflowQuickLaunch
     [PackageRegistration(UseManagedResourcesOnly = true)]
     // This attribute is used to register the information needed to show this package
     // in the Help/About dialog of Visual Studio.
-    [InstalledProductRegistration("#110", "#112", "1.0.0", IconResourceID = 400)]
+    [InstalledProductRegistration("#110", "#112", "1.0.1", IconResourceID = 400)]
     // Declare the package guid
     [Guid(GuidList.guidStackOverflowQuickLaunchQuickLaunchPkgString)]
     // Declare a global search provider supported by this package
